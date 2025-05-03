@@ -15,11 +15,11 @@ class Program
 
             if (guess > magic_number)
             {
-                Console.WriteLine("Higher");
+                Console.WriteLine("Lower");
             }
             else if (guess < magic_number)
             {
-                Console.WriteLine("Lower");
+                Console.WriteLine("Higher");
             }
             else
             {
