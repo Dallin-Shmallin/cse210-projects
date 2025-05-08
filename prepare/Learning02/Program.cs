@@ -5,16 +5,20 @@ public class Job
     public int _startyear;
     public int _endyear;
 
-    public string DisplayJobInformation(string company, int startyear, int endyear)
+    public string DisplayJobInformation()
     {
-        return string.Format("", company,startyear,endyear);
+        return _company + " " + _startyear.ToString() + "-" + _endyear.ToString();
     }
 }
 class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello Learning02 World!");
-
+        Job john = new Job();
+        john._company = "McDonalds";
+        john._startyear = 2025;
+        john._endyear = 2026;
+        string johninfo = john.DisplayJobInformation();
+        Console.WriteLine(johninfo);
     }
 }
