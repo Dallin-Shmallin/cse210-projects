@@ -1,5 +1,6 @@
 using System;
 using System.Security.Cryptography.X509Certificates;
+using System.IO;
 
 class Program
 {
@@ -25,16 +26,111 @@ class Journal
 
     public void InteractWithUser()
     {
-        _choice = DisplayChoices();
-        if (_choice == "1")
+        while (true)
         {
-            Console.WriteLine("Here is a prompt for you:");
-            Random random = new Random();
-            int index = random.Next(_prompts.Count);
-            Console.WriteLine(_prompts[index]);
-            Console.WriteLine("Please enter your journal entry:");
-            string entry = Console.ReadLine();
+            string choice = DisplayChoices();
+            switch (choice)
+            {
+                case "1":
+                    Write();
+                    break;
+                case "2":
+                    Display();
+                    break;
+                case "3":
+                    Load();
+                    break;
+                case "4":
+                    Save();
+                    break;
+                case "5":
+                    Quit();
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice. Please try again.\n");
+                    break;
+            }
         }
+    }
+
+    public void Write()
+    {
+        Console.WriteLine("Here is a prompt for you:");
+        Random random = new Random();
+        int index = random.Next(_prompts.Count);
+        string prompt = _prompts[index];
+        Console.WriteLine(prompt);
+        Console.WriteLine("Please enter your journal entry:");
+        string entryText = Console.ReadLine();
+        string date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        Entry entry = new Entry
+        {
+            _date = date,
+            _prompt = prompt,
+            _entry = entryText
+        };
+        _entries.Add(entry);
+        Console.WriteLine("Entry saved!\n");
+    }
+
+    public void Display()
+    {
+        if (_entries.Count == 0)
+        {
+            Console.WriteLine("No entries to display.\n");
+            return;
+        }
+        foreach (Entry entry in _entries)
+        {
+            entry.DisplayEntry();
+        }
+    }
+
+    public void Save()
+    {
+        Console.Write("Enter filename to save to: ");
+        string filename = Console.ReadLine();
+        using (StreamWriter writer = new StreamWriter(filename))
+        {
+            foreach (Entry entry in _entries)
+            {
+                writer.WriteLine($"{entry._date}|{entry._prompt}|{entry._entry}");
+            }
+        }
+        Console.WriteLine("Journal saved!\n");
+    }
+
+    public void Load()
+    {
+        Console.Write("Enter filename to load from: ");
+        string filename = Console.ReadLine();
+        if (!File.Exists(filename))
+        {
+            Console.WriteLine("File not found.\n");
+            return;
+        }
+        _entries.Clear();
+        foreach (string line in File.ReadAllLines(filename))
+        {
+            string[] parts = line.Split('|');
+            if (parts.Length == 3)
+            {
+                Entry entry = new Entry
+                {
+                    _date = parts[0],
+                    _prompt = parts[1],
+                    _entry = parts[2]
+                };
+                _entries.Add(entry);
+            }
+        }
+        Console.WriteLine("Journal loaded!\n");
+    }
+
+    public void Quit()
+    {
+        Console.WriteLine("Goodbye!");
+        Environment.Exit(0);
     }
 
     public string DisplayChoices()
@@ -48,9 +144,17 @@ class Journal
         return Console.ReadLine();
     }
 }
+
 class Entry
 {
     public string _entry;
     public string _date;
+    public string _prompt;
 
+    public void DisplayEntry()
+    {
+        Console.WriteLine($"Date: {_date}");
+        Console.WriteLine($"Prompt: {_prompt}");
+        Console.WriteLine($"Entry: {_entry}\n");
+    }
 }
