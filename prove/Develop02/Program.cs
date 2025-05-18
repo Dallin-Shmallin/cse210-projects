@@ -13,7 +13,6 @@ class Program
 class Journal
 {
     public List<string> _prompts = new List<string>();
-    public string _choice;
     public List<Entry> _entries = new List<Entry>();
 
     public Journal()
