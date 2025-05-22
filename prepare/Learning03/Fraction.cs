@@ -1,4 +1,5 @@
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 class Fraction
 {
     private int _numerator;
@@ -17,5 +18,29 @@ class Fraction
     {
         _numerator = numerator;
         _denominator = denominator;
+    }
+    public int GetNumerator()
+    {
+        return _numerator;
+    }
+    public int GetDenominator()
+    {
+        return _denominator;
+    }
+    public void SetNumerator(int numerator)
+    {
+        _numerator = numerator;
+    }
+    public void SetDenominator(int denominator)
+    {
+        _denominator = denominator;
+    }
+    public string GetFractionString()
+    {
+        return string.Format("{0}/{1}", _numerator, _denominator);
+    }
+    public double GetDecimalValue()
+    {
+        return (double)_numerator / _denominator;
     }
 }
