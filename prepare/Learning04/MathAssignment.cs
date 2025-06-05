@@ -11,8 +11,7 @@ class MathAssignment : Assignment
     }
     public string GetHomeworkList()
     {
-        GetSummary();
-        return $"Problems: {_problems}, Textbook Section: {_textbookSection}";
+        return $"{GetSummary()}\n{_textbookSection} {_problems}";
     }
 
 }

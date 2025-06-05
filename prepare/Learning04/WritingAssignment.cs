@@ -8,7 +8,6 @@ class WritingAssignment : Assignment {
     }
     public string GetWritingInformation()
     {
-        GetSummary();
-        return $"{_title} by {_studentName}";
+        return $"{GetSummary()}\n{_title} by {_studentName}";
     }
 }
