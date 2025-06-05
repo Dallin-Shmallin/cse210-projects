@@ -1,24 +1,21 @@
 using System;
 using System.Globalization;
+using System.Runtime.CompilerServices;
 
 class Program
 {
     static void Main(string[] args)
     {
-        int number;
-        List<int> numbers = new List<int>();
-        Console.WriteLine("Enter a list of numbers, type 0 when you're finished:");
-        do{
-            Console.WriteLine("Enter a number:");
-            number = Convert.ToInt32(Console.ReadLine());
-            if (number != 0)
-            {
-                numbers.Add(number);
-            }
-        }
-        while (number != 0);
-        Console.WriteLine("The sum is: " + numbers.Sum());
-        Console.WriteLine("The average is: " + numbers.Average());
-        Console.WriteLine("The largest number is: " + numbers.Max());
+
     }
 }
+class Assignment
+{
+    protected string _studentName;
+    protected string _topic;
+    protected string GetSummary()
+    {
+        return $"Student: {_studentName}, Topic: {_topic}";
+    }
+}
+
