@@ -1,21 +1,36 @@
+using System;
+using Microsoft.VisualBasic;
 class BreathExercise : Exercise
-{
 
-    public BreathExercise(int waitTime, string goodJobMessage, string openingMessage)
-        : base(waitTime, goodJobMessage, openingMessage)
+{
+    public BreathExercise(string title, string description)
+        : base(title,description)
     {
-        _waitTime = waitTime;
-        _goodJobMessage = goodJobMessage;
-        _openingMessage = openingMessage;
+        _title = title;
+        _description = description;
+
     }
 
     public void StartBreathExercise()
     {
-        Console.WriteLine(_openingMessage);
-        Console.WriteLine("Take a deep breath in...");
-        System.Threading.Thread.Sleep(_waitTime);
-        Console.WriteLine("Now breathe out slowly...");
-        System.Threading.Thread.Sleep(_waitTime);
-        Console.WriteLine(_goodJobMessage);
+        StartActivity();
+        int interval;
+        if (_waitTime < 12000)
+        {
+            interval = 2;
+        }
+        else
+        {
+            interval = _waitTime / 6000;
+        }
+        double dividedTime = _waitTime / interval;
+        for (double i = 0; i < _waitTime; i += dividedTime * 2)
+        {
+            Console.WriteLine("Take a deep breath in...");
+            DisplayLoadingAnimation(dividedTime);
+            Console.WriteLine("Now breathe out slowly...");
+            DisplayLoadingAnimation(dividedTime);
+        }
+        EndActivity();
     }
 }
