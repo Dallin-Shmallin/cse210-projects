@@ -7,6 +7,8 @@ class Goal
     protected int _points;
     public virtual int Complete() {return 0;}
     public virtual string Display() {return "";}
+    public virtual string DisplayToUser() {return "";}
+    public string Gettype() { return _type; }
     public string GetName() { return _name; }
     public Goal(string name, string description, int points, string requirements, string type)
     {
