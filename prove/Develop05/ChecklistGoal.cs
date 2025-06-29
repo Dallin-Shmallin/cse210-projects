@@ -9,4 +9,8 @@ class ChecklistGoal : Goal
         _timesUntilCompleted = timesUntilCompleted;
         _type = "Checklist";
     }
+    public override string Display()
+    {
+        return $"{_name} ({_description}) - Points: {_points} - Requirements: {_requirements} - Completed: {_timesCompleted}/{_timesUntilCompleted}";
+    }
 }

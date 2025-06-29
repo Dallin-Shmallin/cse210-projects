@@ -7,7 +7,7 @@ class SimpleGoal : Goal
         _type = "Simple";
     }
 
-    protected override string Display()
+    public override string Display()
     {
         return $"{_name} ({_description}) - Points: {_points} - Requirements: {_requirements}";
     }
