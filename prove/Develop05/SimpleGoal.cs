@@ -11,4 +11,9 @@ class SimpleGoal : Goal
     {
         return $"{_name} ({_description}) - Points: {_points} - Requirements: {_requirements}";
     }
+    public override int Complete()
+    {
+        _isCompleted = true;
+        return _points;
+    }
 }

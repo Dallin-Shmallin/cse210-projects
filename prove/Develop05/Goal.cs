@@ -5,8 +5,9 @@ class Goal
     protected string _description;
     protected string _requirements;
     protected int _points;
-    protected virtual void Complete() { }
-    public virtual string Display() {return ""; }
+    public virtual int Complete() {return 0;}
+    public virtual string Display() {return "";}
+    public string GetName() { return _name; }
     public Goal(string name, string description, int points, string requirements, string type)
     {
         _name = name;

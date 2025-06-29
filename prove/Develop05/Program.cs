@@ -51,6 +51,7 @@ class Program
                     Console.WriteLine("Listing goals...");
                     foreach (var goal in goals)
                     {
+                        Console.Write(goals.IndexOf(goal) + 1 + ". ");
                         Console.WriteLine(goal.Display());
                     }
                     break;
@@ -64,7 +65,17 @@ class Program
                     break;
                 case 5:
                     Console.WriteLine("Recording an event...");
-                    // Logic to record an event
+                    Console.WriteLine("Enter the name of the goal to record an event for:");
+                    string goalName = Console.ReadLine();
+                    foreach (var goal in goals)
+                    {
+                        if (goal.GetName() == goalName)
+                        {
+                            goal.Complete();
+                        }
+                    }
+
+
                     break;
                 case 6:
                     Console.WriteLine("Quitting the program.");
