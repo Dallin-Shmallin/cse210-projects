@@ -1,1 +1,6 @@
-class PixelColumn{}
+class PixelColumn
+{
+    public PixelColumn()
+    {
+    }
+}

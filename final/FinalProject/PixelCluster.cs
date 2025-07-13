@@ -1,1 +1,4 @@
-class PixelCluster{}
+class PixelCluster
+{
+    public PixelCluster(){}
+}

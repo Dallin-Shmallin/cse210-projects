@@ -1,1 +1,3 @@
-class PixelRow{}
+class PixelRow {
+    public PixelRow(){}
+}
