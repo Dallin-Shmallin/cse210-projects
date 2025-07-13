@@ -18,9 +18,9 @@ class Program
             Console.WriteLine("It will be in black and white");
         }
         Console.WriteLine("Converting image to ASCII");
-        Console.WriteLine("what image path would you like to save the ASCII image to?");
+        Console.WriteLine("what filepath would you like to save the ASCII text art to?");
         string savePath = Console.ReadLine();
         Console.WriteLine("saving ASCII image to file");
-        Console.WriteLine($"ASCII image saved to {savePath}");
+        Console.WriteLine($"ASCII text art saved to {savePath}");
     }
 }
