@@ -1,4 +1,6 @@
-class Character
+abstract class Character
 {
-    public virtual void Display() { }
+    protected PixelCluster _cluster;
+    public Character(PixelCluster cluster) { _cluster = cluster; }
+    public abstract string ToAscii();
 }

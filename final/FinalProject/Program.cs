@@ -5,22 +5,28 @@ class Program
 {
     static void Main(string[] args)
     {
-        ImageManager imageManager = new ImageManager();
-        string imagePath = imageManager.GetDesktopBackground();
-        Console.WriteLine($"Desktop background image path found at {imagePath}");
+        Console.WriteLine("Enter the filepath of the image to convert to ASCII art:");
+        string imagePath = Console.ReadLine();
+
         Console.WriteLine("Would you like this image to be in color or black and white? (c/b)");
         string choice = Console.ReadLine();
-        if (choice == "c")
-        {
-            Console.WriteLine("It will be in color");
-        }
-        else {
-            Console.WriteLine("It will be in black and white");
-        }
-        Console.WriteLine("Converting image to ASCII");
-        Console.WriteLine("what filepath would you like to save the ASCII text art to?");
-        string savePath = Console.ReadLine();
-        Console.WriteLine("saving ASCII image to file");
+
+        ImageManager imageManager = new ImageManager();
+        Image image = imageManager.LoadImage(imagePath);
+
+        Pixel[,] pixels = imageManager.ParseToPixels(image);
+        PixelRow[] pixelRows = imageManager.CreatePixelRows(pixels);
+        PixelColumn[] pixelColumns = imageManager.CreatePixelColumns(pixels);
+
+        PixelCluster[,] clusters = imageManager.CreatePixelClusters(pixelRows, pixelColumns);
+
+        Character[,] characters = imageManager.GenerateCharacters(clusters, choice == "c");
+
+        string asciiArt = imageManager.ConvertCharactersToAscii(characters);
+
+        string savePath = FilePathManager.GetAsciiFilePath(imagePath);
+        FilePathManager.SaveAsciiArtToFile(asciiArt, savePath);
+
         Console.WriteLine($"ASCII text art saved to {savePath}");
     }
 }
