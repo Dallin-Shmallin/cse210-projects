@@ -2,7 +2,6 @@ using System;
 using System.IO;
 class ImageManager
 {
-    private string _desktopBackgroundImagePath;
     public ImageManager()
     {
     }
