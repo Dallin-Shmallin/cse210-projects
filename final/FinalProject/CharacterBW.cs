@@ -1,10 +1,12 @@
-using System.Runtime.CompilerServices;
+
 class CharacterBW : Character
 {
+    private string _character = "";
+
     public CharacterBW(PixelCluster cluster) : base(cluster) { }
-    public override string ToAscii()
+
+    public override string Display()
     {
-        // Convert cluster to ASCII character (black and white)
-        return "#"; // placeholder
+        return _character;
     }
 }

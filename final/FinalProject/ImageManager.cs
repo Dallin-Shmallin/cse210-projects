@@ -2,37 +2,39 @@ using System;
 using System.IO;
 class ImageManager
 {
-    public ImageManager()
-    {
-    }
-    public void GetReadableImage() { }
-    public void SetDesktopBackground(){}
-
     public Image LoadImage(string filePath)
     {
         return new Image(filePath);
     }
 
-    public Pixel[,] ParseToPixels(Image image)
+    public Pixel[] ParseToPixels(Image image)
     {
-        return image.GetPixels();
+        Pixel[] pixelarray = image.GetPixels();
+        return pixelarray;
     }
 
-    public PixelRow[] CreatePixelRows(Pixel[,] pixels)
+    public PixelRow[] CreatePixelRows(Pixel[] pixels, int width, int height)
     {
-        int height = pixels.GetLength(0);
         PixelRow[] rows = new PixelRow[height];
         for (int i = 0; i < height; i++)
-            rows[i] = new PixelRow(pixels, i);
+        {
+            Pixel[] rowPixels = new Pixel[width];
+            Array.Copy(pixels, i * width, rowPixels, 0, width);
+        }
         return rows;
     }
 
-    public PixelColumn[] CreatePixelColumns(Pixel[,] pixels)
+    public PixelColumn[] CreatePixelColumns(Pixel[] pixels, int width, int height)
     {
-        int width = pixels.GetLength(1);
         PixelColumn[] columns = new PixelColumn[width];
         for (int i = 0; i < width; i++)
-            columns[i] = new PixelColumn(pixels, i);
+        {
+            Pixel[] colPixels = new Pixel[height];
+            for (int j = 0; j < height; j++)
+            {
+                colPixels[j] = pixels[j * width + i];
+            }
+        }
         return columns;
     }
 
@@ -68,7 +70,7 @@ class ImageManager
         for (int y = 0; y < height; y++)
         {
             for (int x = 0; x < width; x++)
-                sb.Append(characters[y, x].ToAscii());
+                sb.Append(characters[y, x].Display());
             sb.AppendLine();
         }
         return sb.ToString();
